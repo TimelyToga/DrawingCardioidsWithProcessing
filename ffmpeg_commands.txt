@@ -1,0 +1,11 @@
+// Create video
+ffmpeg -r 60 -f image2 -s 1920x1080 -start_number 1 -i %04d.png -vframes 1000 -vcodec libx264 -crf 25  -pix_fmt yuv420p out.mp4
+
+// Create gif
+ffmpeg -v warning -i test2.mp4 -vf scale=500:-1 -gifflags +transdiff -r 50 -y card.gif
+
+
+// Combined command
+ffmpeg -r 60 -f image2 -s 1920x1080 -start_number 1 -i %04d.png \
+-vframes 1000 -vcodec libx264 -crf 25  -pix_fmt yuv420p out.mp4; \
+ffmpeg -v warning -i out.mp4 -vf scale=500:-1 -gifflags +transdiff -r 50 -y out.gif
